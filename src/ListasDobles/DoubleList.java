@@ -87,7 +87,16 @@ public class DoubleList<T> {
         } else if (i > this.size() ) {
             System.out.println("Error");
         } else {
-            // TODO: Implementar
+            Node<T> aux = this.head;
+            int cont = 0;
+            while(cont < i - 1){
+                aux = aux.getNext();
+                cont++;
+            }
+            n.setNext(aux.getNext());
+            aux.setNext(n);
+            n.getNext().setPrev(n);
+            n.setPrev(aux);
         }
     }
     /**
@@ -138,8 +147,19 @@ public class DoubleList<T> {
             System.out.println("Error");
             return null;
         } else {
-            // TODO: Implementar
-            return null; // Para que no de error
+            Node<T> aux = this.head;
+            int cont = 0;
+            while(cont < i - 1){
+                aux = aux.getNext();
+                cont++;
+            }
+            Node<T> temp = aux.getNext().getNext();
+            Node<T> eliminado = aux.getNext();
+            aux.setNext(temp);
+            temp.setPrev(aux);
+            eliminado.setNext(null);
+            eliminado.setPrev(null);
+            return eliminado.getDato();
         } 
     }
 }
